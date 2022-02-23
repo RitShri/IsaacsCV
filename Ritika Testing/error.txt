@@ -1,0 +1,37 @@
+____________________ 1 : In terminal GST_DEBUG=2 gst-launch-1.0 -v nvarguscamerasrc sensor-id=0 ! 'video/x-raw(memory:NVMM),width=3820,height=2464,format=NV12,framerate=21/1' ! nvvidconv flip-method=0 ! nvegltransform ! nveglglessink -e
+
+
+
+ GST_DEBUG=2 gst-launch-1.0 -v nvarguscamerasrc sensor-id=0 ! 'video/x-raw(memory:NVMM),width=3820,height=2464,format=NV12,framerate=21/1' ! nvvidconv flip-method=0 ! nvegltransform ! nveglglessink -e
+Setting pipeline to PAUSED ...
+
+Using winsys: x11 
+Pipeline is live and does not need PREROLL ...
+0:00:00.123760680  5002   0x55bc17a520 WARN               structure gststructure.c:1832:priv_gst_structure_append_to_gstring: No value transform to serialize field 'display' of type 'GstEGLDisplay'
+Got context from element 'eglglessink0': gst.egl.EGLDisplay=context, display=(GstEGLDisplay)NULL;
+/GstPipeline:pipeline0/GstNvArgusCameraSrc:nvarguscamerasrc0.GstPad:src: caps = video/x-raw(memory:NVMM), width=(int)3820, height=(int)2464, format=(string)NV12, framerate=(fraction)21/1
+
+/GstPipeline:pipeline0/GstCapsFilter:capsfilter0.GstPad:src: caps = video/x-raw(memory:NVMM), width=(int)3820, height=(int)2464, format=(string)NV12, framerate=(fraction)21/1
+Setting pipeline to PLAYING ...
+
+Error generated. /dvs/git/dirty/git-master_linux/multimedia/nvgstreamer/gst-nvarguscamera/gstnvarguscamerasrc.cpp, execute:568 Failed to create CaptureSession
+/GstPipeline:pipeline0/Gstnvvconv:nvvconv0.GstPad:src: caps = video/x-raw(memory:NVMM), width=(int)3820, height=(int)2464, format=(string)NV12, framerate=(fraction)21/1
+New clock: GstSystemClock
+/GstPipeline:pipeline0/GstNvEglTransform:nvegltransform0.GstPad:src: caps = video/x-raw(memory:EGLImage), width=(int)3820, height=(int)2464, format=(string)RGBA, framerate=(fraction)21/1
+/GstPipeline:pipeline0/GstEglGlesSink:eglglessink0.GstPad:sink: caps = video/x-raw(memory:EGLImage), width=(int)3820, height=(int)2464, format=(string)RGBA, framerate=(fraction)21/1
+/GstPipeline:pipeline0/GstNvEglTransform:nvegltransform0.GstPad:sink: caps = video/x-raw(memory:NVMM), width=(int)3820, height=(int)2464, format=(string)NV12, framerate=(fraction)21/1
+/GstPipeline:pipeline0/Gstnvvconv:nvvconv0.GstPad:sink: caps = video/x-raw(memory:NVMM), width=(int)3820, height=(int)2464, format=(string)NV12, framerate=(fraction)21/1
+/GstPipeline:pipeline0/GstCapsFilter:capsfilter0.GstPad:sink: caps = video/x-raw(memory:NVMM), width=(int)3820, height=(int)2464, format=(string)NV12, framerate=(fraction)21/1
+Got EOS from element "pipeline0".
+Execution ended after 0:00:00.066394358
+Setting pipeline to PAUSED ...
+Setting pipeline to READY ...
+Setting pipeline to NULL ...
+Freeing pipeline ...
+ 
+_______________ 2: In terminal ____________________ GST_DEBUG=2 gst-launch-1.0 -v nvarguscamerasrc sensor-id=0 ! 'video/x-raw(memory:EGLImage),width=3820,height=2464,format=RGBA,framerate=21/1' ! nvvidconv flip-method=0 ! nvegltransform ! nveglglessink -e
+
+
+0:00:00.123786797  5100   0x55733ae870 ERROR           GST_PIPELINE grammar.y:730:gst_parse_perform_link: could not link nvarguscamerasrc0 to nvvconv0, neither element can handle caps video/x-raw(memory:EGLImage), width=(int)3820, height=(int)2464, format=(string)RGBA, framerate=(fraction)21/1
+WARNING: erroneous pipeline: could not link nvarguscamerasrc0 to nvvconv0, neither element can handle caps video/x-raw(memory:EGLImage), width=(int)3820, height=(int)2464, format=(string)RGBA, framerate=(fraction)21/1
+
