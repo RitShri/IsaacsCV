@@ -1,7 +1,10 @@
 import numpy as np
 import cv2
  
+<<<<<<< Updated upstream
  
+=======
+>>>>>>> Stashed changes
 cap = cv2.VideoCapture('fisheye_video.avi')
  
 while(cap.isOpened()):

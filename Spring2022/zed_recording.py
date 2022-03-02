@@ -23,10 +23,12 @@ params = sl.RecordingParameters(
 err = zed.enable_recording(params)
 
 # Here is the code to record with ZED
-while not err :
-    if zed.grab() == SUCCESS :
+key = ' '
+while key != 113 :
+    zed.grab()
+ #   if zed.grab() == sl.ERROR_CODE.SUCCESS :
         # Each new frame is added to the SVO file
-        zed.record()
+   #     zed.record()
 
 # Disable recording
 zed.disable_recording()
