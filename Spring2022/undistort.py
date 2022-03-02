@@ -1,3 +1,8 @@
+'''
+Takes in an image as a parameter:
+
+Undistorts said image based on parameters given below
+'''
 import numpy as np
 import sys
 import cv2
