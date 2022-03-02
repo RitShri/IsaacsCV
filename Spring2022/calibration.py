@@ -13,7 +13,7 @@ objp[0,:,:2] = np.mgrid[0:CHECKERBOARD[0], 0:CHECKERBOARD[1]].T.reshape(-1, 2)
 _img_shape = None
 objpoints = [] # 3d point in real world space
 imgpoints = [] # 2d points in image plane.
-images = glob.glob('./img_fisheye_160/*.jpg')
+images = glob.glob('./img_fisheye_200/*.jpg')
 print(len(images))
 #gray = cv2.cvtColor(images[0],cv2.COLOR_BGR2GRAY)
 index = 0
@@ -30,6 +30,7 @@ for fname in images:
     corners = None
     ret, corners = cv2.findChessboardCorners(gray, CHECKERBOARD, flags=cv2.CALIB_CB_ADAPTIVE_THRESH+cv2.CALIB_CB_FAST_CHECK+cv2.CALIB_CB_NORMALIZE_IMAGE)
     # If found, add object points, image points (after refining them)
+    print(ret)
     if ret == True:
         objpoints.append(objp)
         cv2.cornerSubPix(gray,corners,(3,3),(-1,-1),subpix_criteria)

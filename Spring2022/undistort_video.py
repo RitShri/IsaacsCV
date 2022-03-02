@@ -57,11 +57,11 @@ def show_camera():
     # To flip the image, modify the flip_method parameter (0 and 2 are the most common)
     print(gstreamer_pipeline(flip_method=0))
     video_capture = cv2.VideoCapture(gstreamer_pipeline(flip_method=0), cv2.CAP_GSTREAMER)
-    video_capture2 = cv2.VideoCapture(1)
-    if video_capture.isOpened() and video_capture2.isOpened():
+    #video_capture2 = cv2.VideoCapture(1)
+    if video_capture.isOpened():# and video_capture2.isOpened():
         try:
             window_handle = cv2.namedWindow(window_title, cv2.WINDOW_AUTOSIZE)
-            window_handle2 = cv2.namedWindow(window_title2, cv2.WINDOW_AUTOSIZE)
+            #window_handle2 = cv2.namedWindow(window_title2, cv2.WINDOW_AUTOSIZE)
             while True:
                 ret_val, frame_fish = video_capture.read()
                 frame_fish = undistort(frame_fish)
@@ -71,7 +71,7 @@ def show_camera():
                 # GTK - Substitute WND_PROP_AUTOSIZE to detect if window has been closed by user
                 if cv2.getWindowProperty(window_title, cv2.WND_PROP_AUTOSIZE) >= 0:
                     cv2.imshow(window_title, frame_fish)
-                    cv2.imshow(window_title2,cv2.resize(frame_dep,(600,720)))
+                    #cv2.imshow(window_title2,cv2.resize(frame_dep,(600,720)))
                 else:
                     break 
                 keyCode = cv2.waitKey(10) & 0xFF
