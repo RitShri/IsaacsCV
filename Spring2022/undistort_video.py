@@ -16,13 +16,14 @@ def gstreamer_pipeline(
     framerate=30,
     flip_method=0,
 ):
+    '''
     return (
         "nvarguscamerasrc sensor-id=%d !"
         "video/x-raw(memory:NVMM), width=(int)%d, height=(int)%d, framerate=(fraction)%d/1 ! "
         "nvvidconv flip-method=%d ! "
         "video/x-raw, width=(int)%d, height=(int)%d, format=(string)BGRx ! "
         "videoconvert ! "
-        "video/x-raw, format=(string)BGR ! appsink"
+        "video/x-raw, format=(string)BGR ! xvimagesink"
         % (
             sensor_id,
             capture_width,
@@ -33,6 +34,8 @@ def gstreamer_pipeline(
             display_height,
         )
     )
+    '''
+    return "gst-launch-1.0 nvarguscamerasrc ! nvvidconv ! xvimagesink"
 
 DIM=(640, 480)
 K=np.array([[395.2474957410931, 0.0, 313.5019461730335], [0.0, 527.3954916199217, 196.37742657771022], [0.0, 0.0, 1.0]])
@@ -61,7 +64,7 @@ def show_camera():
             window_handle2 = cv2.namedWindow(window_title2, cv2.WINDOW_AUTOSIZE)
             while True:
                 ret_val, frame_fish = video_capture.read()
-		frame_fish = undistort(frame_fish)
+                frame_fish = undistort(frame_fish)
                 ret_val, frame_dep = video_capture2.read()
                 # Check to see if the user closed the window
                 # Under GTK+ (Jetson Default), WND_PROP_VISIBLE does not work correctly. Under Qt it does
