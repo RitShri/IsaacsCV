@@ -30,6 +30,7 @@ class AppType(enum.Enum):
     LEFT_AND_RIGHT = 1
     LEFT_AND_DEPTH = 2
     LEFT_AND_DEPTH_16 = 3
+    LEFT = 5
 
 
 def progress_bar(percent_done, bar_length=50):
@@ -53,6 +54,7 @@ def main():
         sys.stdout.write("                   2=Export LEFT+RIGHT image sequence.\n")
         sys.stdout.write("                   3=Export LEFT+DEPTH_VIEW image sequence.\n")
         sys.stdout.write("                   4=Export LEFT+DEPTH_16Bit image sequence.\n")
+        sys.stdout.write("                   5=Export LEFT ONLY image sequence.\n")
         sys.stdout.write(" A and B need to end with '/' or '\\'\n\n")
         sys.stdout.write("Examples: \n")
         sys.stdout.write("  (AVI LEFT+RIGHT):  ZED_SVO_Export \"path/to/file.svo\" \"path/to/output/file.avi\" 0\n")
@@ -72,9 +74,11 @@ def main():
         app_type = AppType.LEFT_AND_DEPTH
     if sys.argv[3] == "4":
         app_type = AppType.LEFT_AND_DEPTH_16
+    if sys.argv[3] == "5":
+        app_type = AppType.LEFT
     
     # Check if exporting to AVI or SEQUENCE
-    if sys.argv[3] != "0" and sys.argv[3] != "1":
+    if sys.argv[3] != "0" and sys.argv[3] != "1" and sys.argv[3] != "5":
         output_as_video = False
 
     if not output_as_video and not output_path.is_dir():
@@ -139,7 +143,7 @@ def main():
             svo_position = zed.get_svo_position()
 
             # Retrieve SVO images
-            zed.retrieve_image(left_image, sl.VIEW.LEFT)
+            
 
             if app_type == AppType.LEFT_AND_RIGHT:
                 zed.retrieve_image(right_image, sl.VIEW.RIGHT)
@@ -147,6 +151,8 @@ def main():
                 zed.retrieve_image(right_image, sl.VIEW.DEPTH)
             elif app_type == AppType.LEFT_AND_DEPTH_16:
                 zed.retrieve_measure(depth_image, sl.MEASURE.DEPTH)
+            elif app_type == AppType.LEFT:
+                zed.retrieve_image(left_image, sl.VIEW.LEFT)
 
             if output_as_video:
                 # Copy the left image to the left side of SBS image

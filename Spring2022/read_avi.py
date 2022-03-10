@@ -1,12 +1,12 @@
 import numpy as np
 import cv2
- 
-<<<<<<< Updated upstream
- 
-=======
->>>>>>> Stashed changes
-cap = cv2.VideoCapture('fisheye_video.avi')
- 
+import sys
+
+#svo_input_path = sys.argv[1]
+
+cap = cv2.VideoCapture("fisheye_video.avi")
+fps = video.get(cv2.CAP_PROP_FPS)
+print(fps)
 while(cap.isOpened()):
     ret, frame = cap.read()
  

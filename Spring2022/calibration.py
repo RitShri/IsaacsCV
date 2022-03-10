@@ -62,7 +62,7 @@ json_data['RVEC'] = [ele.tolist() for ele in rvecs]
 json_string = json.dumps(json_data)
 
 with open('camera_calibration.json', 'w') as  outfile:
-	outfile.write(json_string)
+    outfile.write(json_string)
 
 
 print("Found " + str(N_OK) + " valid images for calibration")
