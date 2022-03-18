@@ -18,7 +18,7 @@ print("Opening zed camera was a", err)
 runtime_parameters = sl.RuntimeParameters()
 runtime_parameters.sensing_mode = sl.SENSING_MODE.STANDARD  # Use STANDARD sensing mode
 
-video_name = '/recordings/zed_video.svo'
+video_name = '../recordings/zed_video.svo'
 params = sl.RecordingParameters(
     video_filename=video_name,
     compression_mode=sl.SVO_COMPRESSION_MODE.H265
